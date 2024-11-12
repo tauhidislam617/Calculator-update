@@ -1,0 +1,96 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #121212; /* Dark background for the whole page */
+}
+
+.view-button {
+  background-color: #1E88E5; /* Blue color for the view button */
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-button:hover {
+  background-color: #1565C0; /* Darker blue on hover */
+}
+
+.close-button {
+  position: absolute;
+  top: 150px; /* Closer to the calculator */
+  right: 785px; /* Closer to the calculator */
+  width: 25px;
+  height: 25px;
+  background-color: #1E88E5; /* Blue color for the close button */
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.close-button:hover {
+  background-color: #1565C0; /* Darker blue on hover */
+}
+
+.calculator {
+  display: none;
+  background-color: #212121; /* Dark background for the calculator */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative; /* Positioning relative to the calculator container */
+}
+
+.display {
+  background-color: #333; /* Dark background for the display */
+  color: white;
+  font-size: 30px;
+  text-align: right;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  background-color: #424242; /* Dark buttons */
+  padding: 20px;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: white; /* White text on buttons */
+}
+
+.btn:hover {
+  background-color: #616161; /* Lighten on hover */
+}
+
+.operator {
+  background-color: #1E88E5; /* Blue color for operators */
+  color: white;
+}
+
+.operator:hover {
+  background-color: #1565C0; /* Darker blue on hover */
+}
+
+#closeButton {
+  display: none;
+}

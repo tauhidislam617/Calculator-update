@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- Linking the external CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <!-- View Calculator Button -->
+  <button onclick="openCalculator()" id="viewButton" class="view-button">View Calculator</button>
+
+  <!-- Close Calculator Button, initially hidden -->
+  <button onclick="closeCalculator()" id="closeButton" class="close-button">&#10005;</button>
+
+  <!-- Calculator Container, initially hidden -->
+  <div class="calculator" id="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="btn" onclick="clearDisplay()">C</button>
+      <button class="btn" onclick="deleteLast()">DEL</button>
+      <button class="btn" onclick="appendSymbol('%')">%</button>
+      <button class="btn operator" onclick="appendSymbol('/')">÷</button>
+
+      <button class="btn" onclick="appendNumber(7)">7</button>
+      <button class="btn" onclick="appendNumber(8)">8</button>
+      <button class="btn" onclick="appendNumber(9)">9</button>
+      <button class="btn operator" onclick="appendSymbol('*')">×</button>
+
+      <button class="btn" onclick="appendNumber(4)">4</button>
+      <button class="btn" onclick="appendNumber(5)">5</button>
+      <button class="btn" onclick="appendNumber(6)">6</button>
+      <button class="btn operator" onclick="appendSymbol('-')">−</button>
+
+      <button class="btn" onclick="appendNumber(1)">1</button>
+      <button class="btn" onclick="appendNumber(2)">2</button>
+      <button class="btn" onclick="appendNumber(3)">3</button>
+      <button class="btn operator" onclick="appendSymbol('+')">+</button>
+
+      <button class="btn" onclick="appendNumber(0)">0</button>
+      <button class="btn" onclick="appendSymbol('.')">.</button>
+      <button class="btn" onclick="calculateResult()">=</button>
+      <button class="btn" onclick="showPreviousResult()">
+        <i class="fas fa-history"></i> <!-- Icon for Previous button -->
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById("display");
+    let previousResult = null;
+    let isNewCalculation = false;
+
+    // Function to open the calculator
+    function openCalculator() {
+      document.getElementById("calculator").style.display = "block";
+      document.getElementById("viewButton").style.display = "none";
+      document.getElementById("closeButton").style.display = "inline-block";
+    }
+
+    // Function to close the calculator
+    function closeCalculator() {
+      document.getElementById("calculator").style.display = "none";
+      document.getElementById("viewButton").style.display = "inline-block";
+      document.getElementById("closeButton").style.display = "none";
+    }
+    
+    function clearDisplay() {
+      display.innerText = "0";
+      isNewCalculation = false;
+    }
+    
+    function deleteLast() {
+      display.innerText = display.innerText.slice(0, -1) || "0";
+    }
+    
+    function appendNumber(number) {
+      if (display.innerText === "0" || isNewCalculation) {
+        display.innerText = number;
+        isNewCalculation = false;
+      } else {
+        display.innerText += number;
+      }
+    }
+    
+    function appendSymbol(symbol) {
+      display.innerText += symbol;
+    }
+    
+    function calculateResult() {
+      try {
+        previousResult = display.innerText;
+        display.innerText = eval(display.innerText);
+        isNewCalculation = true;
+      } catch {
+        display.innerText = "Error";
+        isNewCalculation = true;
+      }
+    }
+    
+    function showPreviousResult() {
+      if (previousResult !== null) {
+        display.innerText = previousResult;
+        isNewCalculation = true;
+      }
+    }
+    
+    document.addEventListener("keydown", (event) => {
+      const key = event.key;
+      if (!isNaN(key) || key === ".") {
+        appendNumber(key);
+      } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+        appendSymbol(key);
+      } else if (key === "Enter") {
+        calculateResult();
+      } else if (key === "Backspace") {
+        deleteLast();
+      } else if (key === "Escape") {
+        clearDisplay();
+      }
+    });
+  </script>
+</body>
+</html>
